@@ -15,17 +15,19 @@ fn print_help() -> Option<(u32, u32, u32)> {
     println!("usage: cachesim [args]\n");
     println!("[args]:");
     println!("    -s <u32>, -S <u32>, --set <u32>: to set the number of sets in the cache.");
+    println!("                                     Notice that the real sets is the 2-power of this given parameter.");
     println!("    -e <u32>, -E <u32>, --associativity <u32>: to set the number of associativity in the cache.");
     println!("    -b <u32>, -B <u32>, --bit <u32>: to set the number of block size in bits in the cache.");
+    println!("                                     Notice that the real bits is the 2-power of this given parameter.");
     println!("    -h, --help: print this manual.");
     None
 }
 
 fn resolve_arguments() -> Result<Option<(u32, u32, u32)>, String> {
     let args: Vec<String> = env::args().collect();
-    let mut s = 8;
+    let mut s = 2;
     let mut e = 1;
-    let mut b = 8;
+    let mut b = 3;
     let mut state:char = '_';
 
     for arguement in &args[1..] {

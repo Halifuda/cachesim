@@ -80,6 +80,7 @@ use oracle_cache::OracleCache;
 fn main() {
     // Use your own cache by passing it to CacheDevice.
     let mut cache = CacheDevice::new(OracleCache::new(), "path\\to\\config\\file");
+}
 ```
 
 By this way you could even introduce a hierarchical storage architecture by define and implement several `struct` that are well organized.

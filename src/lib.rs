@@ -84,6 +84,27 @@ fn main() {
 ```
 
 By this way you could even introduce a hierarchical storage architecture by define and implement several `struct` that are well organized.
+
+----
+
+To use the example cache, you need to provide a config file.
+
+For Default Cache, your file need to include following contents with strict format, each occurs in a single line:
+
+- `type=default$` # this must not be changed
+- `sets=<u32>$` # to define the number of sets in the cache
+- `associativity=<u32>$` # to define the number of ways(associativity) in one cache set
+- `blocksize=<u32>$` # to define the size in byte of a cacheline(block)
+
+do not add any white space in these lines, and do add '$' at the end of each line.
+
+For Oracle Cache, your file need to include following contents in a single line:
+
+- `type=default$` # this must not be changed
+
+do not add any white space in these lines, and do add '$' at the end of each line.
+
+See `examples/default.txt`.
  */
 
 

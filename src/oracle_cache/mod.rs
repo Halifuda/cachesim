@@ -17,7 +17,7 @@ impl OracleCache {
 }
 
 impl GeneralCacheBehavior for OracleCache {
-    fn init(&self, filename:&str) -> Result<(), String> {
+    fn init(&mut self, filename:&str) -> Result<(), String> {
         use std::fs::*;
 
         let content = read_to_string(filename);
@@ -36,7 +36,10 @@ impl GeneralCacheBehavior for OracleCache {
     fn get_type(&self) -> &str {
         &self.cachetype
     }
-    fn access(&self, _addr:u32) -> AccessResult {
+    fn access(&mut self, _addr:u32) -> AccessResult {
         AccessResult(HitOrMiss::Hit, 0.0)
     }
+    fn clear(&mut self) {}
+
+    fn size(&self) -> usize { 0 }
 }

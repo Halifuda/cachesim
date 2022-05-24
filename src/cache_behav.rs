@@ -15,12 +15,18 @@ pub mod general_cache_behavior {
     /// General cache behavior, all types have to implement.
     pub trait GeneralCacheBehavior {
         /// Initialize cache status.
-        fn init(&self, filename:&str) -> Result<(), String>;
+        fn init(&mut self, filename:&str) -> Result<(), String>;
 
         /// Get cache type in ref str.
         fn get_type(&self) -> &str;
 
         /// Method simulating single access to the cache.
-        fn access(&self, addr:u32) -> AccessResult;
+        fn access(&mut self, addr:u32) -> AccessResult;
+
+        /// Clear the whold cache.
+        fn clear(&mut self);
+
+        /// Get the total size of the cache in byte.
+        fn size(&self) -> usize;
     }
 }

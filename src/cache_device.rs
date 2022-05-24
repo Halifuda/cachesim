@@ -14,7 +14,7 @@ pub struct CacheDevice<T:GeneralCacheBehavior> {
 impl<T:GeneralCacheBehavior> CacheDevice<T> {
     pub fn new(cache:T, filename:&str) -> Self {
         println!("Constructing Cache Device...");
-        let res = CacheDevice::<T>{ device:cache, hits:0, misses:0, latency:0.0 };
+        let mut res = CacheDevice::<T>{ device:cache, hits:0, misses:0, latency:0.0 };
         res.device.init(filename).expect("Cache Init Error");
         println!("Cache Type: {}", res.device.get_type());
         println!("Cache Device constructed.");
@@ -47,5 +47,22 @@ impl<T:GeneralCacheBehavior> CacheDevice<T> {
     /// in form of (hits cnt:u32, misses cnt:u32, latency:f64).
     pub fn get_result(&self) -> (u32, u32, f64) {
         (self.hits, self.misses, self.latency)
+    }
+
+    /// Get total cache capacity in byte.
+    pub fn get_size(&self) -> usize {
+        self.device.size()
+    }
+
+    /// Clear the whole cache.
+    pub fn clear(&mut self) {
+        self.device.clear();
+    }
+
+    /// Clear the recorded results.
+    pub fn clear_result(&mut self) {
+        self.hits = 0;
+        self.misses = 0;
+        self.latency = 0.0;
     }
 }

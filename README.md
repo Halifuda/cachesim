@@ -1,4 +1,4 @@
-/*!
+# cachesim
 
 > A highly scalable cache simulator
 
@@ -8,7 +8,7 @@
 
 The basic usage is like:
 
-```rust,no run
+```rust
 use cachesim::{CacheDevice, DefaultCache, general_cache_behavior::*};
 
 fn main() {
@@ -46,7 +46,7 @@ fn main() {
 
 To introduce a new type of cache, you need not to modify the source code. For example, if you want to introduce an 'Oracle Cache', firstly you could create a file 'oracle_cache.rs' or a module 'oracle_cache/mod.rs' under your own project directory. Then, define a `struct` representing the cache:
 
-```rust,no run
+```rust
 pub struct OracleCache {
     cachetype:String
     // other field may be needed.
@@ -55,7 +55,7 @@ pub struct OracleCache {
 
 Then, implement the `GeneralCacheBehavior` for your new cache type:
 
-```rust,no run
+```rust
 use crate::cache_behav::{general_cache_behavior::*};
 
 impl GeneralCacheBehavior for OracleCache {
@@ -71,7 +71,7 @@ You can implement any other method for the cache.
 
 Then, use your own cache in your project:
 
-```rust,no run
+```rust
 use cachesim::{CacheDevice, general_cache_behavior::*};
 // Import your own cache.
 mod oracle_cache;
@@ -83,15 +83,3 @@ fn main() {
 ```
 
 By this way you could even introduce a hierarchical storage architecture by define and implement several `struct` that are well organized.
- */
-
-
-pub mod cache_behav;
-pub mod cache_device;
-pub mod oracle_cache;
-pub mod default_cache;
-
-pub use cache_behav::*;
-pub use cache_device::*;
-pub use oracle_cache::*;
-pub use default_cache::*;

@@ -14,7 +14,20 @@ pub mod general_cache_behavior {
 
     /// General cache behavior, all types have to implement.
     pub trait GeneralCacheBehavior {
-        /// Initialize cache status.
+        /// Initialize cache status. Receiving a config file to decide 
+        /// the configure of the cache.
+        /// 
+        /// # Errors
+        /// 
+        /// If this function meets any error, the implementor 
+        /// should remember to handle it and return an error in String.
+        /// In example cache implementation, an error will occured when 
+        /// an IO error occured, or failed to parse the config file.
+        /// 
+        /// # Panics
+        /// 
+        /// In example cache implementation, panic if failed to read any 
+        /// content in passed config file.
         fn init(&mut self, filename:&str) -> Result<(), String>;
 
         /// Get cache type in ref str.

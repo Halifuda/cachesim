@@ -1,4 +1,4 @@
-use crate::cache_behav::{general_cache_behavior::*, general_cache_behavior::AccessResult::*};
+use crate::cache_behav::{general_cache_behavior::*};
 
 #[derive(Debug)]
 pub struct OracleCache {
@@ -6,17 +6,31 @@ pub struct OracleCache {
 }
 
 impl OracleCache {
-    pub fn new(&self) -> Self {
+    pub fn new() -> Self {
         OracleCache{ cachetype:String::from("oracle") }
     }
 }
 
 impl GeneralCacheBehavior for OracleCache {
-    fn init(&self, _filename:&str) {}
+    fn init(&self, filename:&str) -> Result<(), String> {
+        use std::fs::*;
+
+        let content = read_to_string(filename);
+        match content {
+            Err(_) => Err(format!("failed to read {}", filename)),
+            Ok(_) => {
+                let content = content.unwrap();
+                match content.find("type=oracle") {
+                    None => Err(format!("type mismatched: except oracle")),
+                    Some(_) => Ok(()),
+                }
+            },
+        }
+    }
     fn get_type(&self) -> &str {
         &self.cachetype
     }
     fn access(&self, _addr:u32) -> AccessResult {
-        Hit
+        AccessResult(HitOrMiss::Hit, 0.0)
     }
 }

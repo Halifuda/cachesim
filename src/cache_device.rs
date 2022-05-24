@@ -1,5 +1,8 @@
+//! Up-level Cache Device Simulator struct-s.
+
 use crate::cache_behav::{general_cache_behavior::*, general_cache_behavior::HitOrMiss::*};
 
+/// Device Simulator struct. Recording total access results.
 #[derive(Debug)]
 pub struct CacheDevice<T:GeneralCacheBehavior> {
     device: T,
@@ -18,8 +21,11 @@ impl<T:GeneralCacheBehavior> CacheDevice<T> {
         res
     }
 
+    /// Get the cache type of inside cache device.
     pub fn get_type(&self) -> &str { self.device.get_type() }
 
+    /// Method simulating a single access to the cache device.
+    /// Recording hits, misses and latency.
     pub fn access(&mut self, addr:u32) -> AccessResult {
         let AccessResult(res, lat) = self.device.access(addr);
         match res {
@@ -36,6 +42,9 @@ impl<T:GeneralCacheBehavior> CacheDevice<T> {
         }
     }
 
+    /// Get currently recorded total access results, 
+    /// 
+    /// in form of (hits cnt:u32, misses cnt:u32, latency:f64).
     pub fn get_result(&self) -> (u32, u32, f64) {
         (self.hits, self.misses, self.latency)
     }

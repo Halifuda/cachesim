@@ -1,5 +1,10 @@
+//! Oracle Cache Examples.
+//! 
+//! Oracle cache hit on every access with exact 0 latency.
+
 use crate::cache_behav::{general_cache_behavior::*};
 
+/// Oracle Cache struct.
 #[derive(Debug)]
 pub struct OracleCache {
     cachetype:String
@@ -19,6 +24,7 @@ impl GeneralCacheBehavior for OracleCache {
         match content {
             Err(_) => Err(format!("failed to read {}", filename)),
             Ok(_) => {
+                // verifing type is oracle.
                 let content = content.unwrap();
                 match content.find("type=oracle") {
                     None => Err(format!("type mismatched: except oracle")),

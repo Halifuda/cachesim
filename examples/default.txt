@@ -1,0 +1,6 @@
+type=default$
+sets=64$
+associativity=16$
+blocksize=64$
+hit latency=3.0$
+miss penalty=100.0$

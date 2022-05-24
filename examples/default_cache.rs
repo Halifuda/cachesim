@@ -3,7 +3,7 @@ use cachesim::{CacheDevice, DefaultCache, general_cache_behavior::*, general_cac
 fn main() {
     // To simulate a cache, firstly build a Cache Device, 
     // given a Cache struct and a config file to initialize the cache.
-    let mut cache = CacheDevice::new(DefaultCache::new(), "F:\\Programs\\Programs-Rust\\cachesim_example\\default.txt");
+    let mut cache = CacheDevice::new(DefaultCache::new(), "default.txt");
 
     // The total size of the cache in bytes could be get by get_size().
     println!("cache size:{}B", cache.get_size());

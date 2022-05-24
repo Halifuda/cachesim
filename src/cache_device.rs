@@ -1,15 +1,15 @@
 use crate::cache_behav::{general_cache_behavior::*, general_cache_behavior::AccessResult::*};
 
 #[derive(Debug)]
-pub struct CacheSimulator<T:GeneralCacheBehavior> {
+pub struct CacheDevice<T:GeneralCacheBehavior> {
     device: T,
     hits: u32,
     misses: u32
 }
 
-impl<T:GeneralCacheBehavior> CacheSimulator<T> {
+impl<T:GeneralCacheBehavior> CacheDevice<T> {
     pub fn new(cache:T) -> Self {
-        CacheSimulator::<T>{ device:cache, hits:0, misses:0 }
+        CacheDevice::<T>{ device:cache, hits:0, misses:0 }
     }
 
     pub fn get_cache_type(&self) -> &str { self.device.get_type() }

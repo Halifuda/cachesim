@@ -104,7 +104,7 @@ do not add any white space in these lines, and do add '$' at the end of each lin
 
 For Oracle Cache, your file need to include following contents in a single line:
 
-- `type=default$` # this must not be changed
+- `type=oracle$` # this must not be changed
 
 do not add any white space in these lines, and do add '$' at the end of each line.
 

@@ -4,6 +4,8 @@
 
 `cachesim` provides a highly scalable skeleton of cache simulator. One can use this tool not only to simulate a conventional cache behavior but also introduce his own type of cache and even other level of storage in the storage hierarchy, which will introduce benefits into storage and memory research.
 
+I have made an example to use this crate as a library in a local Rust project. Please refer to [cachesim_example](https://github.com/Halifuda/cachesim_example).
+
 ----
 
 The basic usage is like:
@@ -95,6 +97,8 @@ For Default Cache, your file need to include following contents with strict form
 - `sets=<u32>$` # to define the number of sets in the cache
 - `associativity=<u32>$` # to define the number of ways(associativity) in one cache set
 - `blocksize=<u32>$` # to define the size in byte of a cacheline(block)
+- `hit latency=<f64>$`
+- `miss penalty=<f64>$` # this 2 configs define the latency feature of the cache, the unit of these float numbers are not needed and must not be written here
 
 do not add any white space in these lines, and do add '$' at the end of each line.
 
